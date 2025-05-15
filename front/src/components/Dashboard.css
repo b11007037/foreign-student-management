@@ -1,0 +1,137 @@
+.dashboard-container {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  padding: 12px;
+  flex-direction: column;
+  font-family: 'Segoe UI', sans-serif;
+}
+  
+.dashboard-header {
+  position: fixed;
+  padding: 20px 40px;
+  top: 12px;
+  left: 0px;
+  right: 0px;
+  margin: 0 12px;
+  background-color: #7FB5BB;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 2%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  font-size: 15px;
+  z-index: 1000;
+}
+  
+.logout-link {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 16px;
+  margin-right: 20px;
+}
+
+.logout-link:hover{
+  text-decoration: underline;
+}
+  
+.dashboard-main {
+  margin-top: 80px;        /* 高度要等於 header 的高度 */
+  margin-left: 240px;      /* 寬度要等於 sidebar 的寬度 */
+  padding: 40px;
+  height: calc(100vh - 80px); /* 滿版減去 header 的高度 */
+  overflow-y: auto;        /* 加入滾動功能，只滾內容區 */
+}
+
+.language-switch {
+  position: fixed; 
+  bottom: 20px;
+  right: 20px;
+  background-color: white;
+  color: #7FB5BB;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  cursor: pointer;
+  user-select: none;
+  z-index: 2;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+}
+
+.language-switch:hover {
+  background-color: rgb(232, 232, 232);
+}
+
+.sidebar {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 200px;
+  height: calc(100vh - 80px);
+  border-right: 1px solid #adadad;
+  overflow-y: auto;
+  align-items: center;
+  word-break: break-word;
+  z-index: 100;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  font-size: 16px;
+  color: #2e5e32;
+  padding: 5px 12px 5px 8px; 
+  text-align: right;
+  transition: 0.2s ease;
+}
+
+.sidebar li:hover {
+  color: #E46868;
+}
+  
+.content {
+  flex: 1;
+  padding: 40px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  font-size: 16px;
+  color: #2e5e32;
+  transition: 0.2s ease;
+  word-break: break-word;
+}
+
+.menu-item:hover {
+  color: #E46868;
+}
+
+.menu-text {
+  flex-grow: 1;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.arrow {
+  align-self: center;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
