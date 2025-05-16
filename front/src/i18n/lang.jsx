@@ -9,7 +9,7 @@ const translations = {
     studentInfo: '查詢學生基本資料',
     certificateExpiry: '證照到期通知',
     studentResidence: '學生居住現址',
-    greeting: '老師，您好',
+    greeting: '老師您好',
     welcomeMessage: '歡迎使用外籍生管理系統',
   },
   en: {
@@ -22,7 +22,7 @@ const translations = {
     studentInfo: 'Student Information Inquiry',
     certificateExpiry: 'Certificate Expiry Notification',
     studentResidence: 'Student Residence Address',
-    greeting: 'Hello, Teacher',
+    greeting: 'Hello Teacher',
     welcomeMessage: 'Welcome to the Foreign Student Management System',
   }
 };

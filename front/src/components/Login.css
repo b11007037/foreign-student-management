@@ -12,6 +12,7 @@ html, body {
   align-items: center;
   overflow: hidden;
   flex-direction: column;
+  font-family: "Anonymous Pro", monospace;
 }
 
 .login-container::before {

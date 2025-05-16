@@ -4,7 +4,7 @@
   display: flex;
   padding: 12px;
   flex-direction: column;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Anonymous Pro", monospace;
 }
   
 .dashboard-header {
@@ -40,11 +40,14 @@
 }
   
 .dashboard-main {
-  margin-top: 80px;        /* 高度要等於 header 的高度 */
-  margin-left: 240px;      /* 寬度要等於 sidebar 的寬度 */
-  padding: 40px;
-  height: calc(100vh - 80px); /* 滿版減去 header 的高度 */
-  overflow-y: auto;        /* 加入滾動功能，只滾內容區 */
+  display: flex;
+  margin-top: 80px;
+  margin-left: 200px;
+  padding: 20px;
+  width: calc(100% - 188px); /* 減去左側欄寬度 */
+  height: calc(100vh - 80px); /* 減去標題區高度 */
+  overflow-y: auto;
+  box-sizing: border-box;
 }
 
 .language-switch {
@@ -79,9 +82,7 @@
   height: calc(100vh - 80px);
   border-right: 1px solid #adadad;
   overflow-y: auto;
-  align-items: center;
-  word-break: break-word;
-  z-index: 100;
+  z-index: 101;
 }
 
 .sidebar ul {
@@ -103,10 +104,19 @@
 }
   
 .content {
-  flex: 1;
-  padding: 40px;
+  position: fixed;
+  top: 80px;
+  right: 5px;
+  bottom: 0;
+  left: 220px;
+  margin-right: 12px;
+  padding: 20px;
+  background-color: #F4FAF3;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
-  font-size: 20px;
+  overflow-y: auto;
 }
 
 .menu-item {
@@ -116,11 +126,28 @@
   padding: 10px 12px;
   font-size: 16px;
   color: #2e5e32;
-  transition: 0.2s ease;
   word-break: break-word;
+  transition: transform 0.3s ease, color 0.5s ease;
 }
 
 .menu-item:hover {
+  color: #E46868;
+  transform: translateX(-10px);
+}
+
+.menu-item:active {
+  transform: translateX(-20px);
+  color: #E46868;
+}
+
+.menu-item:focus-within,
+.menu-item:focus {
+  transform: translateX(-20px);  
+  color: #E46868;
+}
+
+.menu-item:focus:not(:hover) {
+  transform: translateX(-10px);  
   color: #E46868;
 }
 
@@ -134,4 +161,81 @@
   align-self: center;
   flex-shrink: 0;
   margin-left: 8px;
+}
+
+/* CertificateExpiry */
+.license-expiry {
+  margin: 0;
+  padding: 10px;
+}
+
+.filter-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.filter-select {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.expiry-table-container {
+  max-height: 400px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.expiry-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  
+}
+
+.expiry-table th, .expiry-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+/* MessageBox */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px 30px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.modal-message {
+  font-size: 18px;
+  color: #E46868;
+  margin-bottom: 10px;
+}
+
+.modal-close {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #E46868;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
