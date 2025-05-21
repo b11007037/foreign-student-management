@@ -27,31 +27,40 @@ function Login() {
     } else {
       alert('t.accountPlaceholder');
     }
-    // 傳送資料到後端範例
+    // 傳送資料到後端
     /*
-    fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        account: account,
-        password: password,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          alert('登入成功！');
-          // 可以做導頁或存token之類的動作
-        } else {
-          alert('登入失敗，請檢查帳號密碼');
-        }
-      })
-      .catch((error) => {
-        console.error('錯誤:', error);
-        alert('伺服器錯誤');
+    const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!account.trim() || !password.trim()) {
+      alert(t.emptyAccountOrPassword || '請輸入帳號與密碼');
+      return;
+    }
+
+    try {
+      const res = await fetch('http://localhost:3000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ account, password }),
       });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        alert(errorData.message || t.loginFailed || '登入失敗，請檢查帳號或密碼');
+        return;
+      }
+
+      const data = await res.json();
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+        navigate('/dashboard', { state: { teacherName: account } });
+      } else {
+        alert(t.loginFailed || '登入失敗，請檢查帳號或密碼');
+      }
+    } catch (err) {
+      console.error('登入錯誤:', err);
+      alert(t.serverError || '伺服器錯誤，請稍後再試');
+    }
     */  
   };
   return (

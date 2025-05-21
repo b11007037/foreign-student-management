@@ -1,11 +1,13 @@
 import React from 'react';
 import './Dashboard.css';
 import { useNavigate } from 'react-router-dom';
+import translations from '../i18n/lang';
 
 function StudentDetail({ student }) {
   const navigate = useNavigate();
+  const lang = localStorage.getItem('lang') || 'zh';
+  const t = translations[lang];
 
-  // 返回上一頁或指定頁面
   const goBack = () => {
     navigate('/dashboard', { state: { activeComponent: 'StudentInfo' } });
   };
@@ -13,85 +15,86 @@ function StudentDetail({ student }) {
   return (
     <div className="student-detail-container">
       <div className='back-button-container'>
-        <button className="back-button" onClick={goBack}>回到上一頁</button>
+        <button className="back-button" onClick={goBack}>{t.back}</button>
       </div>
+
       {/* 學生基本資料 */}
-      <h3 className="student-section-title">學生基本資料</h3>
+      <h3 className="student-section-title">{t.basicInfoTitle}</h3>
       <table className="student-detail-table">
         <tbody>
           <tr>
-            <td className="student-cell title">學號：</td>
+            <td className="student-cell title">{t.studentID}：</td>
             <td className="student-cell">{student.id}</td>
-            <td className="student-cell title">英文姓名：</td>
+            <td className="student-cell title">{t.englishName}：</td>
             <td className="student-cell">{student.englishName}</td>
-            <td className="student-cell title">中文姓名：</td>
+            <td className="student-cell title">{t.chineseName}：</td>
             <td className="student-cell">{student.name}</td>
           </tr>
           <tr>
-            <td className="student-cell title">性別：</td>
+            <td className="student-cell title">{t.gender}：</td>
             <td className="student-cell">{student.gender}</td>
-            <td className="student-cell title">出生年月日：</td>
+            <td className="student-cell title">{t.dateOfBirth}：</td>
             <td className="student-cell">{student.birthDate}</td>
-            <td className="student-cell title">國籍：</td>
+            <td className="student-cell title">{t.nationality}：</td>
             <td className="student-cell">{student.nationality}</td>
           </tr>
           <tr>
-            <td className="student-cell title">科系：</td>
+            <td className="student-cell title">{t.department}：</td>
             <td className="student-cell">{student.dept}</td>
-            <td className="student-cell title">年級：</td>
+            <td className="student-cell title">{t.grade}：</td>
             <td className="student-cell">{student.grade}</td>
-            <td className="student-cell title">班級：</td>
+            <td className="student-cell title">{t.class}：</td>
             <td className="student-cell">{student.class}</td>
           </tr>
         </tbody>
       </table>
 
       {/* 學生聯絡方式 */}
-      <h3 className="student-section-title">學生聯絡方式</h3>
+      <h3 className="student-section-title">{t.studentContactTitle}</h3>
       <table className="student-detail-table">
         <tbody>
           <tr>
-            <td className="student-cell title">Email：</td>
+            <td className="student-cell title">{t.email}：</td>
             <td className="student-cell">{student.email}</td>
           </tr>
           <tr>
-            <td className="student-cell title">行動電話號碼：</td>
+            <td className="student-cell title">{t.mobileNumber}：</td>
             <td className="student-cell">{student.phone}</td>
           </tr>
           <tr>
-            <td className="student-cell title">學生現居地址：</td>
+            <td className="student-cell title">{t.currentAddress}：</td>
             <td className="student-cell">{student.address}</td>
           </tr>
         </tbody>
       </table>
 
       {/* 緊急連絡人資訊 */}
-      <h3 className="student-section-title">緊急連絡人資訊</h3>
+      <h3 className="student-section-title">{t.emergencyContactTitle}</h3>
       <table className="student-detail-table">
         <tbody>
           <tr>
-            <td className="student-cell title">緊急聯絡人姓名：</td>
+            <td className="student-cell title">{t.emergencyContactName}：</td>
             <td className="student-cell">{student.emergencyName}</td>
-            <td className="student-cell title">緊急聯絡人電話號碼：</td>
+            <td className="student-cell title">{t.emergencyContactPhone}：</td>
             <td className="student-cell">{student.emergencyPhone}</td>
           </tr>
         </tbody>
       </table>
 
       {/* 證照資料 */}
-      <h3 className="student-section-title">證照資料</h3>
+      <h3 className="student-section-title">{t.certificateInfoTitle}</h3>
       <table className="student-detail-table">
         <tbody>
           <tr>
-            <td className="student-cell title">簽證類型：</td>
+            <td className="student-cell title">{t.visaType}：</td>
             <td className="student-cell">{student.visaType}</td>
           </tr>
           <tr>
-            <td className="student-cell title">簽證號碼：</td>
+            <td className="student-cell title">{t.visaNumber}：</td>
             <td className="student-cell">{student.visaNumber}</td>
           </tr>
           <tr>
-            <td className="student-cell title">工作證號碼：</td>
+            <td className="student-cell title">{t.workPermitNumber}：</td>
             <td className="student-cell">{student.workPermitNumber}</td>
           </tr>
         </tbody>

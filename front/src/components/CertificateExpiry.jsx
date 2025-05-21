@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Dashboard.css';
+import translations from '../i18n/lang';
 
 const mockData = [
     { 
@@ -40,15 +41,26 @@ const mockData = [
   ];
 
 function CertificateExpiry() {
+  const lang = localStorage.getItem('lang') || 'zh';
+  const t = translations[lang];
+
   const tableHeaders = [
-    '學號', '姓名', '系所', '年級', '班級', 
-    '簽證號碼生效日', '簽證號碼到期日', 
-    '工作證號碼生效日', '工作證號碼到期日'
+    t.studentID,
+    t.studentName,
+    t.department,
+    t.grade,
+    t.class,
+    t.visaStartDate,
+    t.visaEndDate,
+    t.workStartDate,
+    t.workEndDate
   ];
+
   const [selectedDept, setSelectedDept] = useState('');
   const [selectedGrade, setSelectedGrade] = useState('');
   const [selectedClass, setSelectedClass] = useState('');
   const [filteredData, setFilteredData] = useState(mockData);
+
   const handleFilter = () => {
     const result = mockData.filter((student) => {
       return (
@@ -59,29 +71,33 @@ function CertificateExpiry() {
     });
     setFilteredData([...result]);
   };
+
   return (
     <div className="license-expiry">
       <div className="filter-container">
-        {/* 正確的 onChange 綁定到 <select> 元素 */}
         <select className="filter-select" onChange={(e) => setSelectedDept(e.target.value)} value={selectedDept}>
-          <option value="">請選擇系所</option>
-          <option value="資訊管理系">資訊管理系</option>
-          <option value="應用華語系">應用華語系</option>
+          <option value="">{t.selectDepartment}</option>
+          <option value={t.deptIM}>{t.deptIM}</option>
+          <option value={t.deptAC}>{t.deptAC}</option>
         </select>
+
         <select className="filter-select" onChange={(e) => setSelectedGrade(e.target.value)} value={selectedGrade}>
-          <option value="">請選擇年級</option>
-          <option value="一年級">一年級</option>
-          <option value="二年級">二年級</option>
-          <option value="三年級">三年級</option>
-          <option value="四年級">四年級</option>
+          <option value="">{t.selectGrade}</option>
+          <option value={t.grade1}>{t.grade1}</option>
+          <option value={t.grade2}>{t.grade2}</option>
+          <option value={t.grade3}>{t.grade3}</option>
+          <option value={t.grade4}>{t.grade4}</option>
         </select>
+
         <select className="filter-select" onChange={(e) => setSelectedClass(e.target.value)} value={selectedClass}>
-          <option value="">請選擇班級</option>
+          <option value="">{t.selectClass}</option>
           <option value="A">A</option>
           <option value="B">B</option>
         </select>
-        <button className="confirm-button" onClick={handleFilter}>確定</button>
+
+        <button className="confirm-button" onClick={handleFilter}>{t.confirmButton}</button>
       </div>
+
       <div className="expiry-table-container">
         <table className="expiry-table">
           <thead>
@@ -106,10 +122,10 @@ function CertificateExpiry() {
                   <td>{student.workEnd}</td>
                 </tr>
               ))
-            ):(
+            ) : (
               <tr>
-                <td colSpan={tableHeaders.length} style={{ color: '#999' }}>
-                  尚無資料
+                <td colSpan={tableHeaders.length} style={{ color: '#999', textAlign: 'center' }}>
+                  {t.noData}
                 </td>
               </tr>
             )}
@@ -119,6 +135,5 @@ function CertificateExpiry() {
     </div>
   );
 }
-
 
 export default CertificateExpiry;

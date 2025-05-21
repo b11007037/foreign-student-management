@@ -89,7 +89,7 @@ function Dashboard() {
         <section className="content">
           {activeComponent === '' && (
             <div className="welcome-message">
-              <p>{teacherName}{t.greeting}</p>
+              <p>{t.greeting}</p>
               <p>{t.welcomeMessage}</p>
             </div>
           )}
@@ -107,7 +107,7 @@ function Dashboard() {
         <MessageBox
           show={showModal}
           onClose={handleCloseModal}
-          message="已通知簽證/工作證即將到期之學生"
+          message={t.expiryNoticeMessage}
         />
       </div>
     </div>

@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
 import './Dashboard.css';
+import translations from '../i18n/lang';
+import mockStudents from '../data/mockStudents';
 
-const mockData = [
-    { id: 's02507001', name: '學生壹', dept: '資訊管理系', grade: '四年級', class: 'A' },
-    { id: 's02507002', name: '學生厄', dept: '資訊管理系', grade: '四年級', class: 'A' },
-    { id: 's02507003', name: '學生參', dept: '資訊管理系', grade: '四年級', class: 'A' },
-    { id: 's02507004', name: '學生寺', dept: '資訊管理系', grade: '四年級', class: 'A' },
-    { id: 's02507005', name: '學生舞', dept: '資訊管理系', grade: '四年級', class: 'A' },
-    { id: 's02507006', name: '學生溜', dept: '資訊管理系', grade: '四年級', class: 'A' },
-    { id: 's02507007', name: '學生柒', dept: '資訊管理系', grade: '四年級', class: 'A' },
-];
 
 function StudentInfo({ onViewDetails }) {
+  const lang = localStorage.getItem('lang') || 'zh';
+  const t = translations[lang];
+
   const tableHeaders = [
-    '','學號', '姓名', '系所', '年級', '班級'
+    '',
+    t.studentID,
+    t.studentName,
+    t.department,
+    t.grade,
+    t.class
   ];
   const [selectedDept, setSelectedDept] = useState('');
   const [selectedGrade, setSelectedGrade] = useState('');
   const [selectedClass, setSelectedClass] = useState('');
-  const [filteredData, setFilteredData] = useState(mockData);
+  const [filteredData, setFilteredData] = useState(mockStudents); 
 
   const handleFilter = () => {
     const result = mockData.filter((student) => {
@@ -30,29 +31,35 @@ function StudentInfo({ onViewDetails }) {
     });
     setFilteredData([...result]);
   };
-
+  
   return (
     <div className="license-expiry">
       <div className="filter-container">
         <select className="filter-select" onChange={(e) => setSelectedDept(e.target.value)} value={selectedDept}>
-          <option value="">請選擇系所</option>
-          <option value="資訊管理系">資訊管理系</option>
-          <option value="應用華語系">應用華語系</option>
+          <option value="">{t.selectDepartment}</option>
+          <option value={t.deptIM}>{t.deptIM}</option>
+          <option value={t.deptAC}>{t.deptAC}</option>
         </select>
+
         <select className="filter-select" onChange={(e) => setSelectedGrade(e.target.value)} value={selectedGrade}>
-          <option value="">請選擇年級</option>
-          <option value="一年級">一年級</option>
-          <option value="二年級">二年級</option>
-          <option value="三年級">三年級</option>
-          <option value="四年級">四年級</option>
+          <option value="">{t.selectGrade}</option>
+          <option value={t.grade1}>{t.grade1}</option>
+          <option value={t.grade2}>{t.grade2}</option>
+          <option value={t.grade3}>{t.grade3}</option>
+          <option value={t.grade4}>{t.grade4}</option>
         </select>
+
         <select className="filter-select" onChange={(e) => setSelectedClass(e.target.value)} value={selectedClass}>
-          <option value="">請選擇班級</option>
+          <option value="">{t.selectClass}</option>
           <option value="A">A</option>
           <option value="B">B</option>
         </select>
-        <button className="confirm-button" onClick={handleFilter}>確定</button>
+
+        <button className="confirm-button" onClick={handleFilter}>
+          {t.confirmButton}
+        </button>
       </div>
+
       <div className="expiry-table-container">
         <table className="expiry-table">
           <thead>
@@ -68,7 +75,7 @@ function StudentInfo({ onViewDetails }) {
                 <tr key={index}>
                   <td>
                     <button className="view-button" onClick={() => onViewDetails(student, index, filteredData)}>
-                      查詢
+                      {t.viewButton}
                     </button>
                   </td>
                   <td>{student.id}</td>
@@ -81,7 +88,7 @@ function StudentInfo({ onViewDetails }) {
             ) : (
               <tr>
                 <td colSpan={tableHeaders.length} style={{ textAlign: 'center', color: '#999' }}>
-                  尚無資料
+                  {t.noData}
                 </td>
               </tr>
             )}
